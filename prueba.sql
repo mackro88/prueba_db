@@ -82,7 +82,7 @@ INSERT INTO producto_factura (id_producto, id_factura, cantidad)
     (8, 8, 3),
     (1, 9, 4),
     (6, 10, 1);
--- Consultas
+-- Consulta ¿Cuántos clientes han comprado el producto 6? 
 SELECT count(*) AS producto_6 FROM producto_factura WHERE id_producto=6;
 
 
