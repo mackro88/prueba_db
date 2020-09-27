@@ -18,6 +18,13 @@ CREATE TABLE producto(
     PRIMARY KEY(id),
     FOREIGN KEY(id_categoria) REFERENCES categoria(id) 
 );
+CREATE TABLE cliente(
+    id SERIAL,
+    nombre VARCHAR(30) NOT NULL,
+    rut VARCHAR(10) NOT NULL UNIQUE,
+    direccion VARCHAR(100) NOT NULL,
+    PRIMARY KEY (id)
+);
 CREATE TABLE factura(
     id SERIAL,
     numero_factura INT NOT NULL,
@@ -33,14 +40,13 @@ CREATE TABLE producto_factura(
     FOREIGN KEY(id_producto) REFERENCES producto(id), 
     FOREIGN KEY(id_factura) REFERENCES factura(id) 
 );
-CREATE TABLE cliente(
-    id SERIAL,
-    nombre VARCHAR(30) NOT NULL,
-    rut VARCHAR(10) NOT NULL UNIQUE,
-    direccion VARCHAR(100) NOT NULL,
-    PRIMARY KEY (rut),
-);
 -- Ingresa registros
+INSERT INTO cliente (nombre, rut, direccion) 
+	VALUES ('Claudia', '17118258-1', 'Mujica 55'),
+    ('María', '18170684-8', 'Salvador 15'),
+	('Fresia', '17345987-0', 'Errázuriz 2456'),
+    ('Soledad', '21332543-8', 'Alameda 000'),
+    ('Carla', '19324543-2', 'Playa Ancha 33');
 INSERT INTO categoria (nombre_cat, descripcion) 
 	VALUES ('videojuegos', 'Lo último en videojuegos.'),
     ('musica', 'Tecnología musical de vanguardia.'),
@@ -74,11 +80,7 @@ INSERT INTO producto_factura (id_producto, id_factura, cantidad)
     (6, 6, 1),
     (7, 7, 2),
     (8, 8, 3),
-    (9, 9, 4),
-    (10, 10, 1);
-INSERT INTO cliente (nombre, rut, direccion) 
-	VALUES ('Claudia', '17118258-1', 'Mujica 55'),
-    ('María', '18170684-8', 'Salvador 15'),
-	('Fresia', '17345987-0', 'Errázuriz 2456'),
-    ('Soledad', '21332543-8', 'Alameda 000'),
-    ('Carla', '19324543-2', 'Playa Ancha 33');
+    (1, 9, 4),
+    (2, 10, 1);
+
+
