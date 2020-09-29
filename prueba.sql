@@ -82,9 +82,9 @@ INSERT INTO producto_factura (cantidad, total_productos, id_producto, id_factura
     (3, 36000, 8, 8),
     (4, 83960, 1, 9),
     (1, 24900, 6, 10);
+-- Consulta ¿Qué cliente realizó la compra más cara?
+SELECT nombre, rut FROM cliente INNER JOIN factura ON cliente.id = factura.id_cliente WHERE valor_total = (SELECT MAX(valor_total) FROM factura);
 -- Consulta ¿Cuántos clientes han comprado el producto 6? 
 SELECT count(*) AS producto_6 FROM producto_factura WHERE id_producto=6;
--- Consulta ¿Qué cliente realizó la compra más cara?
-SELECT MAX(valor_unitario * cantidad) AS valor_mayor FROM producto INNER JOIN producto_factura ON producto.id = producto_factura.id_producto;
 
 
