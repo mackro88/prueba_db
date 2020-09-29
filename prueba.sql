@@ -4,53 +4,53 @@ CREATE DATABASE prueba;
 \c prueba;
 -- Crear tablas
 CREATE TABLE categoria(
-    id SERIAL,
+    id SERIAL PRIMARY KEY,
     nombre_cat VARCHAR(30) NOT NULL,
-    descripcion TEXT,
-    PRIMARY KEY(id)
+    descripcion TEXT
 );
 CREATE TABLE producto(
-    id SERIAL,
+    id SERIAL PRIMARY KEY,
     nombre VARCHAR(30) NOT NULL,
     descripcion TEXT,
     valor_unitario INT NOT NULL,
     id_categoria INT NOT NULL,
-    PRIMARY KEY(id),
     FOREIGN KEY(id_categoria) REFERENCES categoria(id) 
 );
 CREATE TABLE cliente(
-    id SERIAL,
+    id SERIAL PRIMARY KEY,
     nombre VARCHAR(30) NOT NULL,
     rut VARCHAR(10) NOT NULL UNIQUE,
-    direccion VARCHAR(100) NOT NULL,
-    PRIMARY KEY (id)
+    direccion VARCHAR(100) NOT NULL
 );
 CREATE TABLE factura(
-    id SERIAL,
+    id SERIAL PRIMARY KEY,
     numero_factura INT NOT NULL,
     fecha_creacion DATE NOT NULL,
+    subtotal INT NOT NULL,
+    iva INT NOT NULL,
+    valor_total INT NOT NULL,
     id_cliente INT NOT NULL,
-    PRIMARY KEY (id),
     FOREIGN KEY(id_cliente) REFERENCES cliente(id) 
 );
 CREATE TABLE producto_factura(
+    cantidad INT NOT NULL,
+    total_productos INT NOT NULL,
     id_producto INT NOT NULL,
     id_factura INT NOT NULL,
-    cantidad INT NOT NULL,
     FOREIGN KEY(id_producto) REFERENCES producto(id), 
     FOREIGN KEY(id_factura) REFERENCES factura(id) 
 );
 -- Ingresa registros
+INSERT INTO categoria (nombre_cat, descripcion) 
+	VALUES ('videojuegos', 'Lo último en videojuegos.'),
+    ('musica', 'Tecnología musical de vanguardia.'),
+	('deporte', 'Aumenta tu rendimiento físico.');
 INSERT INTO cliente (nombre, rut, direccion) 
 	VALUES ('Claudia', '17118258-1', 'Mujica 55'),
     ('María', '18170684-8', 'Salvador 15'),
 	('Fresia', '17345987-0', 'Errázuriz 2456'),
     ('Soledad', '21332543-8', 'Alameda 000'),
     ('Carla', '19324543-2', 'Playa Ancha 33');
-INSERT INTO categoria (nombre_cat, descripcion) 
-	VALUES ('videojuegos', 'Lo último en videojuegos.'),
-    ('musica', 'Tecnología musical de vanguardia.'),
-	('deporte', 'Aumenta tu rendimiento físico.');
 INSERT INTO producto (nombre, descripcion, valor_unitario, id_categoria) 
 	VALUES ('God of War', 'God of War 4 PS4', 20990, 1),
     ('Joystick', 'PS Remote', 40990, 1),
