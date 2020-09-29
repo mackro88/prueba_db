@@ -41,18 +41,12 @@ CREATE TABLE producto_factura(
     FOREIGN KEY(id_factura) REFERENCES factura(id) 
 );
 -- Ingresa registros
-INSERT INTO categoria (nombre_cat, descripcion) 
-	VALUES ('videojuegos', 'Lo último en videojuegos.'),
+INSERT INTO categoria (nombre_cat, descripcion) VALUES 
+    ('videojuegos', 'Lo último en videojuegos.'),
     ('musica', 'Tecnología musical de vanguardia.'),
 	('deporte', 'Aumenta tu rendimiento físico.');
-INSERT INTO cliente (nombre, rut, direccion) 
-	VALUES ('Claudia', '17118258-1', 'Mujica 55'),
-    ('María', '18170684-8', 'Salvador 15'),
-	('Fresia', '17345987-0', 'Errázuriz 2456'),
-    ('Soledad', '21332543-8', 'Alameda 000'),
-    ('Carla', '19324543-2', 'Playa Ancha 33');
-INSERT INTO producto (nombre, descripcion, valor_unitario, id_categoria) 
-	VALUES ('God of War', 'God of War 4 PS4', 20990, 1),
+INSERT INTO producto (nombre, descripcion, valor_unitario, id_categoria) VALUES 
+    ('God of War', 'God of War 4 PS4', 20990, 1),
     ('Joystick', 'PS Remote', 40990, 1),
 	('Guitarra', 'Acústica', 25000, 2),
     ('Flauta', 'Dulce', 7000, 2),
@@ -60,28 +54,34 @@ INSERT INTO producto (nombre, descripcion, valor_unitario, id_categoria)
     ('Pelota', 'Fútbol', 24900, 3),
     ('Caminadora', 'Plegable', 125000, 3),
     ('Guantes', 'Boxeo, Kickboxing', 12000, 3);
-INSERT INTO factura (numero_factura, fecha_creacion, id_cliente) 
-	VALUES (1, '2020/09/15', 1),
-    (2, '2020/09/16', 1),
-	(1, '2020/09/17', 2),
-    (2, '2020/09/18', 2),
-    (3, '2020/09/17', 2),
-    (1, '2020/09/18', 3),
-    (1, '2020/09/19', 4),
-    (2, '2020/09/20', 4),
-    (3, '2020/09/21', 4),
-    (4, '2020/09/22', 4);
-INSERT INTO producto_factura (id_producto, id_factura, cantidad) 
-	VALUES (1, 1, 2),
-    (2, 2, 3),
-	(3, 3, 3),
-    (4, 4, 2),
-    (5, 5, 3),
-    (6, 6, 1),
-    (7, 7, 2),
-    (8, 8, 3),
-    (1, 9, 4),
-    (6, 10, 1);
+INSERT INTO cliente (nombre, rut, direccion) VALUES 
+    ('Claudia', '17118258-1', 'Mujica 55'),
+    ('María', '18170684-8', 'Salvador 15'),
+	('Fresia', '17345987-0', 'Errázuriz 2456'),
+    ('Soledad', '21332543-8', 'Alameda 000'),
+    ('Carla', '19324543-2', 'Playa Ancha 33');
+INSERT INTO factura (numero_factura, fecha_creacion, subtotal, iva, valor_total, id_cliente) VALUES 
+    (1, '2020/09/15', 41980, 7976, 49956, 1),
+    (2, '2020/09/16', 122970, 23346, 146334, 1),
+	(1, '2020/09/17', 75000, 14250, 89250, 2),
+    (2, '2020/09/18', 14000, 2660, 16660, 2),
+    (3, '2020/09/17', 15000, 2850, 17850, 2),
+    (1, '2020/09/18', 24900, 4731, 29631, 3),
+    (1, '2020/09/19', 250000, 47500, 297500, 4),
+    (2, '2020/09/20', 36000, 6840, 42840, 4),
+    (3, '2020/09/21', 83960, 15952, 99912, 4),
+    (4, '2020/09/22', 24900, 4731, 29631, 4);
+INSERT INTO producto_factura (cantidad, total_productos, id_producto, id_factura) VALUES 
+    (2, 41980, 1, 1),
+    (3, 122970, 2, 2),
+	(3, 75000, 3, 3),
+    (2, 14000, 4, 4),
+    (3, 15000, 5, 5),
+    (1, 24900, 6, 6),
+    (2, 250000, 7, 7),
+    (3, 36000, 8, 8),
+    (4, 83960, 1, 9),
+    (1, 24900, 6, 10);
 -- Consulta ¿Cuántos clientes han comprado el producto 6? 
 SELECT count(*) AS producto_6 FROM producto_factura WHERE id_producto=6;
 -- Consulta ¿Qué cliente realizó la compra más cara?
