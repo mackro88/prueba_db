@@ -84,5 +84,7 @@ INSERT INTO producto_factura (id_producto, id_factura, cantidad)
     (6, 10, 1);
 -- Consulta ¿Cuántos clientes han comprado el producto 6? 
 SELECT count(*) AS producto_6 FROM producto_factura WHERE id_producto=6;
+-- Consulta ¿Qué cliente realizó la compra más cara?
+SELECT MAX(valor_unitario * cantidad) AS valor_mayor FROM producto INNER JOIN producto_factura ON producto.id = producto_factura.id_producto;
 
 
